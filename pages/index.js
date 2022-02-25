@@ -177,7 +177,7 @@ export default function Home({ data }) {
           <thead className='border-b-2 border-gray-200'>
             <tr>
 
-              <th className='p-3 text-sm font-semibold text-left tracking-wide'><input type="checkbox" onChange={handleCheckChangeAll} checked={checkedState.forEach((x) => x ? true : false)} type="checkbox" /></th>
+              <th className='p-3 text-sm font-semibold text-left tracking-wide'><input type="checkbox" onChange={handleCheckChangeAll} checked={checkedState.forEach((x) => x ? true : false)}/></th>
 
               <th className='p-3 text-sm font-semibold text-left tracking-wide'>Name</th>
               <th className='p-3 text-sm font-semibold text-left tracking-wide'>Email</th>
