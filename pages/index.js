@@ -16,7 +16,8 @@ export default function Home({ data }) {
   // const [deleteData, setDeleteData] = useState()
   const [editData, setEditData] = useState()
 
-
+  // All check
+  const [checkedStateAll, setCheckedStateAll] = useState([])
 
 
   const [checkedState, setCheckedState] = useState(
@@ -75,7 +76,8 @@ export default function Home({ data }) {
     deleteDatas = tempData
     setCheckedState(new Array(data.length).fill(false))
   }
-  console.log(deleteDatas)
+
+
 
 
   // to show data when no search
@@ -85,6 +87,7 @@ export default function Home({ data }) {
 
   const filteredDatas = filteredData.slice(indexOfFirstPost, indexOfLastPost) // .slice(0, 10)
   const deleteData = deleteDatas?.slice(indexOfFirstPost, indexOfLastPost)
+
 
 
   // to navitage particular page
@@ -132,8 +135,25 @@ export default function Home({ data }) {
 
   }
 
+  const handleCheckChangeAll = () => {
+    let updatedCheckedStateAll = new Array(data.length).fill(false)
+    
+    // console.log(updatedCheckedStateAll)
 
+    for (let i = 0; i <= Cdata.length; i++) {
+      console.log(">>>> ", updatedCheckedStateAll[(currentPosts[i]?.id) - 1], !updatedCheckedStateAll[(currentPosts[i]?.id) - 1])
+      updatedCheckedStateAll[(currentPosts[i]?.id) - 1] =
+        updatedCheckedStateAll[(currentPosts[i]?.id) - 1] === false ? !updatedCheckedStateAll[(currentPosts[i]?.id) - 1] :
+          updatedCheckedStateAll[(currentPosts[i]?.id) - 1] === undefined && false
+    }
 
+    console.log(updatedCheckedStateAll)
+
+    setCheckedState(updatedCheckedStateAll);
+  }
+
+  console.log(checkedState)
+  console.log(currentPosts)
 
 
   return (
@@ -156,7 +176,9 @@ export default function Home({ data }) {
         <table className='w-full'>
           <thead className='border-b-2 border-gray-200'>
             <tr>
-              <th className='p-3 text-sm font-semibold text-left tracking-wide'><input name="select_all" value="1" type="checkbox" /></th>
+
+              <th className='p-3 text-sm font-semibold text-left tracking-wide'><input type="checkbox" onChange={handleCheckChangeAll} checked={checkedState.forEach((x) => x ? true : false)} type="checkbox" /></th>
+
               <th className='p-3 text-sm font-semibold text-left tracking-wide'>Name</th>
               <th className='p-3 text-sm font-semibold text-left tracking-wide'>Email</th>
               <th className='p-3 text-sm font-semibold text-left tracking-wide'>Role</th>
@@ -167,7 +189,6 @@ export default function Home({ data }) {
           <tbody>
 
             {
-
               filteredData === '' ? (
                 deleteData ? (
                   deleteData.map((item, idx) => (
